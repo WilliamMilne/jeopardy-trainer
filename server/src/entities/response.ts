@@ -7,11 +7,9 @@ export class Response {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
   @ManyToOne(() => User)
   user: number
 
-  @Column()
   @ManyToOne(() => Prompt)
   prompt: number
 
