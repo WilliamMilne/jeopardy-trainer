@@ -19,7 +19,7 @@ require('dotenv').config();
       username: process.env.DBUSER,
       password: process.env.DBPASS,
       database: process.env.DBNAME,
-      entities: [Prompt, Category, Episode, Response, User],
+      entities: [Category, Episode, Prompt, Response, User],
       synchronize: true
     })
   ],

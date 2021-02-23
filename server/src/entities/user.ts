@@ -8,7 +8,4 @@ export class User {
 
   @Column()
   name: string
-
-  // @OneToMany(() => Response, response => response.user)
-  // responses: Response[]
 }

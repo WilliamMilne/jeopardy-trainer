@@ -14,12 +14,10 @@ export class Prompt {
   response: string;
 
   @OneToOne(() => Category)
-  @Column()
   @JoinColumn()
   category: number;
 
   @OneToOne(() => Episode)
-  @Column()
   @JoinColumn()
   episode: number;
 

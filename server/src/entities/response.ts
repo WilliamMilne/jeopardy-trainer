@@ -7,9 +7,9 @@ export class Response {
   @PrimaryGeneratedColumn()
   id: number
 
-  // @Column()
-  // @ManyToOne(() => User, user => user.responses)
-  // user: User
+  @Column()
+  @ManyToOne(() => User)
+  user: number
 
   @Column()
   @ManyToOne(() => Prompt)
