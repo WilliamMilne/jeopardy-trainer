@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Prompt {
+  category: Int!
+  episode: Int!
+  id: Int!
+  point_value: Int!
+  prompt: String!
+  response: String!
+}
+
+type Query {
+  responses: [Prompt!]!
+}
