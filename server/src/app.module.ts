@@ -4,12 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Category } from './entities/category';
-import { Episode } from './entities/episode';
-import { Prompt } from './entities/prompt';
-import { Response } from './entities/response';
-import { User } from './entities/user';
-import { TestResolver } from './graphql/testResolver';
+import { Category } from './category/category';
+import { Episode } from './episode/episode';
+import { Prompt } from './prompt/prompt';
+import { Response } from './response/response';
+import { User } from './user/user';
+import { UserResolver } from './user/user.resolver';
+import { UserService } from './user/user.service';
 
 require('dotenv').config();
 
@@ -34,7 +35,9 @@ require('dotenv').config();
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, TestResolver],
+  providers: [AppService, UserService, UserResolver], 
+  // TODO: Figure out easy way to import all services and resolvers automatically
+  // instead of having to add them each time you create a new one.
 })
 export class AppModule {}
 //https://docs.nestjs.com/techniques/database

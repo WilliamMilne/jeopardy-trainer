@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Category } from "./category";
-import { Episode } from "./episode";
+import { Category } from "../category/category";
+import { Episode } from "../episode/episode";
 
 @Entity()
 @ObjectType()

@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Prompt } from "./prompt";
-import { User } from "./user";
+import { Prompt } from "../prompt/prompt";
+import { User } from "../user/user";
 
 @Entity()
 @ObjectType()
