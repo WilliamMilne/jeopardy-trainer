@@ -20,13 +20,13 @@ export class Prompt {
 
   @OneToOne(() => Category)
   @JoinColumn()
-  @Field(type => Int)
-  category: number;
+  @Field(type => Category)
+  category: Category;
 
   @OneToOne(() => Episode)
   @JoinColumn()
-  @Field(type => Int)
-  episode: number;
+  @Field(type => Episode)
+  episode: Episode;
 
   @Column()
   @Field(type => Int)

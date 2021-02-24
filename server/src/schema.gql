@@ -2,9 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  id: Int!
+  name: String!
+}
+
+type Episode {
+  id: Int!
+  name: String!
+}
+
 type Prompt {
-  category: Int!
-  episode: Int!
+  category: Category!
+  episode: Episode!
   id: Int!
   point_value: Int!
   prompt: String!
@@ -13,4 +23,9 @@ type Prompt {
 
 type Query {
   responses: [Prompt!]!
+}
+
+type User {
+  id: Int!
+  name: String!
 }

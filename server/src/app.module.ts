@@ -23,7 +23,8 @@ require('dotenv').config();
       password: process.env.DBPASS,
       database: process.env.DBNAME,
       entities: [Category, Episode, Prompt, Response, User],
-      synchronize: true
+      synchronize: true,
+      autoLoadEntities: true
     }),
     GraphQLModule.forRoot({
       debug: false,
