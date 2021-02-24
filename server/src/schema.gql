@@ -13,7 +13,26 @@ type Episode {
 }
 
 type Mutation {
+  addPrompt(promptInput: NewPromptInput!): Prompt!
   addUser(name: String!): User!
+}
+
+input NewCategoryInput {
+  id: Int!
+  name: String!
+}
+
+input NewEpisodeInput {
+  id: Int!
+  name: String!
+}
+
+input NewPromptInput {
+  category: NewCategoryInput!
+  episode: NewEpisodeInput!
+  point_value: Int!
+  prompt: String!
+  response: String!
 }
 
 type Prompt {
@@ -26,6 +45,7 @@ type Prompt {
 }
 
 type Query {
+  prompt(id: Float!): Prompt!
   user(id: Float!): User!
 }
 
