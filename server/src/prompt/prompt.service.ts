@@ -1,27 +1,37 @@
 import { Injectable } from "@nestjs/common";
+import { CategoryService } from "src/category/category.service";
+import { Episode } from "src/episode/episode";
+import { EpisodeService } from "src/episode/episode.service";
 import { Connection } from "typeorm";
 import { NewPromptInput } from "./new-prompt.input";
 import { Prompt } from "./prompt";
 
 @Injectable()
 export class PromptService {
-  constructor(private connection: Connection) {
+  constructor(private connection: Connection, private episodeService: EpisodeService, private categoryService: CategoryService) {
 
   }
   async create(input: NewPromptInput): Promise<Prompt> {
     // TODO: need to create category and episode if they don't
     // exist yet? and then via their return values
     // pass those along to the input instead I think
-    console.log(input);
-    const repository = this.connection.getRepository(Prompt);
-    const prompt = repository.save({
-      ...input // this '...' syntax is the "Spread operator" which assigns the values in one object to another
-    });
+    const episode = await this.episodeService.createOrGet(input.episode);
+    const category = await this.categoryService.createOrGet(input.category);
+
+    const newInput: Prompt = {
+      prompt: input.prompt,
+      point_value: input.point_value,
+      response: input.response,
+      episode,
+      category
+    }
+    const repository = await this.connection.getRepository(Prompt);
+    const prompt = await repository.save(newInput);
     return prompt;
   }
   async findOneById(id: number): Promise<Prompt> {
-    const repository = this.connection.getRepository(Prompt);
-    const user = repository.findOne({
+    const repository = await this.connection.getRepository(Prompt);
+    const user = await repository.findOne({
       where: {
         id
       }

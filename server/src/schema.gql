@@ -18,12 +18,12 @@ type Mutation {
 }
 
 input NewCategoryInput {
-  id: Int!
+  jArchiveEpisodeId: String!
   name: String!
 }
 
 input NewEpisodeInput {
-  id: Int!
+  jArchiveId: String!
   name: String!
 }
 

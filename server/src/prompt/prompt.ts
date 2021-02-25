@@ -8,7 +8,7 @@ import { Episode } from "../episode/episode";
 export class Prompt {
   @PrimaryGeneratedColumn()
   @Field(type => Int)
-  id: number;
+  id?: number;
 
   @Column()
   @Field(type => String)

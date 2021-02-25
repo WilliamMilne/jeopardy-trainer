@@ -3,9 +3,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @InputType()
 export class NewCategoryInput {
-  @Field(type => Int)
-  id: number
-
   @Field(type => String)
   name: string
+
+  @Field(type => String)
+  jArchiveEpisodeId: string
 }

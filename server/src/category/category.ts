@@ -11,4 +11,7 @@ export class Category {
   @Column()
   @Field(type => String)
   name: string
+
+  @Column()
+  jArchiveEpisodeId: string
 }
