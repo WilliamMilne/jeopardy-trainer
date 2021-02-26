@@ -38,5 +38,10 @@ export class PromptService {
     })
     return user;
   }
+  async findAll(args: any): Promise<Prompt[]> {
+    const repo = await this.connection.getRepository(Prompt);
+    const prompts = repo.find(args);
+    return prompts;
+  }
 
 }

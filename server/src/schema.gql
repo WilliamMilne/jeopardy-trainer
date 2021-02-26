@@ -48,6 +48,7 @@ type Prompt {
 }
 
 type Query {
+  episode(id: Float!): Episode!
   prompt(id: Float!): Prompt!
   user(id: Float!): User!
 }

@@ -1,10 +1,23 @@
-import { Injectable } from "@nestjs/common";
-import { Connection } from "typeorm";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Connection, Repository } from "typeorm";
 import { Episode } from "./episode";
 import { NewEpisodeInput } from "./episode.input";
 
 @Injectable()
 export class EpisodeService {
+  async findOneById(id: number): Promise<Episode> {
+    const repo = await this.connection.getRepository(Episode);
+    const episode = await repo.findOne({
+      where: {
+        id: id
+      }
+    })
+    if (!episode) {
+      throw new NotFoundException(id);
+    } else {
+      return episode;
+    }
+  }
   constructor(private connection: Connection) {}
 
   async create(input: NewEpisodeInput): Promise<Episode> {
