@@ -16,7 +16,7 @@ export class PromptService {
     // exist yet? and then via their return values
     // pass those along to the input instead I think
     const episode = await this.episodeService.createOrGet(input.episode);
-    const category = await this.categoryService.createOrGet(input.category);
+    const category = await this.categoryService.createOrGet(input.category, episode);
 
     const newInput: Prompt = {
       prompt: input.prompt,

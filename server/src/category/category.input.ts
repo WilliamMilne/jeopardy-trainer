@@ -5,7 +5,4 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class NewCategoryInput {
   @Field(type => String)
   name: string
-
-  @Field(type => String)
-  jArchiveEpisodeId: string
 }

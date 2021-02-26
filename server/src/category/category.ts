@@ -14,9 +14,6 @@ export class Category {
   @Field(type => String)
   name: string
 
-  @Column()
-  jArchiveEpisodeId: string
-
   @OneToMany(() => Prompt, prompt => prompt.category)
   @Field(type=>[Prompt])
   prompts: Prompt[]

@@ -22,7 +22,6 @@ type Mutation {
 }
 
 input NewCategoryInput {
-  jArchiveEpisodeId: String!
   name: String!
 }
 
