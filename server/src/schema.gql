@@ -3,13 +3,17 @@
 # ------------------------------------------------------
 
 type Category {
+  episode: Episode!
   id: Int!
   name: String!
+  prompts: [Prompt!]!
 }
 
 type Episode {
+  categories: [Category!]!
   id: Int!
   name: String!
+  prompts: [Prompt!]!
 }
 
 type Mutation {

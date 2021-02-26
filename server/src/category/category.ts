@@ -1,5 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Episode } from "src/episode/episode";
+import { Prompt } from "src/prompt/prompt";
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 @ObjectType()
@@ -14,4 +16,12 @@ export class Category {
 
   @Column()
   jArchiveEpisodeId: string
+
+  @OneToMany(() => Prompt, prompt => prompt.category)
+  @Field(type=>[Prompt])
+  prompts: Prompt[]
+
+  @ManyToOne(() => Episode)
+  @Field(type => Episode)
+  episode: Episode
 }

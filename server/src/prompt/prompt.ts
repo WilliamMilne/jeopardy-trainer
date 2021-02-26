@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Category } from "../category/category";
 import { Episode } from "../episode/episode";
 
@@ -18,12 +18,12 @@ export class Prompt {
   @Field(type => String)
   response: string;
 
-  @OneToOne(() => Category)
+  @ManyToOne(() => Category)
   @JoinColumn()
   @Field(type => Category)
   category: Category;
 
-  @OneToOne(() => Episode)
+  @ManyToOne(() => Episode)
   @JoinColumn()
   @Field(type => Episode)
   episode: Episode;
