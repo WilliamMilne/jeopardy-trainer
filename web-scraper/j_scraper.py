@@ -15,7 +15,7 @@ class j_scraper():
         """
 
         """
-        all_td = j_round.find_all('td')
+        all_td = j_round.find_all(class_="category")
         categories_html = []
         for td in all_td:
             try:
