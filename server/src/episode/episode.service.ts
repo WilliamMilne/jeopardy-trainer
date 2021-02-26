@@ -10,7 +10,8 @@ export class EpisodeService {
     const episode = await repo.findOne({
       where: {
         id: id
-      }
+      },
+      relations: ["categories", "prompts"]
     })
     if (!episode) {
       throw new NotFoundException(id);
