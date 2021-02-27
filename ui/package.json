@@ -55,6 +55,7 @@
     "@graphql-codegen/typescript": "^1.21.0",
     "@graphql-codegen/typescript-operations": "1.17.14",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
-    "@types/carbon-components-react": "^7.28.0"
+    "@types/carbon-components-react": "^7.28.0",
+    "generate-react-cli": "^6.0.2"
   }
 }

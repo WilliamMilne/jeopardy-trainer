@@ -1,3 +1,12 @@
+# Important Notes
+
+## Creating New Components
+When you want to create a new component, instead of copying and pasting code, use the command `npx generate-react-cli component ComponentName`. It will handle everything for you!
+
+### `npm run generate-types`
+
+This command can only be run once the j-trainer server is running on your local machine. It will use the graphql schema on the server to generate usable types in this typescript project for developer convenience. It should only need to be run when a schema change is made on the server.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
