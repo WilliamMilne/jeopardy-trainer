@@ -16,7 +16,7 @@ export class Clue {
 
   @Column()
   @Field(type => String)
-  response: string;
+  correctResponse: string;
 
   @ManyToOne(() => Category)
   @JoinColumn()

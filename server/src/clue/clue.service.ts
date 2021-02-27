@@ -12,16 +12,13 @@ export class ClueService {
 
   }
   async create(input: NewClueInput): Promise<Clue> {
-    // TODO: need to create category and episode if they don't
-    // exist yet? and then via their return values
-    // pass those along to the input instead I think
     const episode = await this.episodeService.createOrGet(input.episode);
     const category = await this.categoryService.createOrGet(input.category, episode);
 
     const newInput: Clue = {
       clue: input.clue,
       point_value: input.point_value,
-      response: input.response,
+      correctResponse: input.correctResponse,
       episode,
       category
     }

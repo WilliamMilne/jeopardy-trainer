@@ -8,7 +8,7 @@ import { User } from "../user/user";
 export class Response {
   @PrimaryGeneratedColumn()
   @Field(type => Int)
-  id: number
+  id?: number
 
   @ManyToOne(() => User)
   @Field(type => User)

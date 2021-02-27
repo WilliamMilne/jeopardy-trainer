@@ -16,6 +16,8 @@ import { Response } from './response/response';
 import { User } from './user/user';
 import { UserResolver } from './user/user.resolver';
 import { UserService } from './user/user.service';
+import { ResponseResolver } from './response/response.resolver';
+import { ResponseService } from './response/response.service';
 
 require('dotenv').config();
 
@@ -40,7 +42,7 @@ require('dotenv').config();
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, UserService, UserResolver, ClueService, ClueResolver, EpisodeService, CategoryService, EpisodeResolver], 
+  providers: [AppService, UserService, UserResolver, ClueService, ClueResolver, EpisodeService, CategoryService, EpisodeResolver, ResponseService, ResponseResolver], 
   // TODO: Figure out easy way to import all services and resolvers automatically
   // instead of having to add them each time you create a new one.
   // this nestjs code-first graphql example may help: https://github.com/nestjs/nest/blob/master/sample/23-graphql-code-first/src/recipes/recipes.service.ts

@@ -12,4 +12,11 @@ export class User {
   @Column()
   @Field(type => String)
   name: string
+
+  @OneToMany(
+    () => Response,
+    response => response.user
+  )
+  @Field(type => [Response])
+  responses: Response[]
 }

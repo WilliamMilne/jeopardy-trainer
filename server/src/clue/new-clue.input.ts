@@ -13,7 +13,7 @@ export class NewClueInput {
   clue: string;
 
   @Field(type => String)
-  response: string;
+  correctResponse: string;
 
   @Field(type => NewCategoryInput)
   category: NewCategoryInput;

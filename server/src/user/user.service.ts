@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { Response } from "src/response/response";
 import { Connection } from "typeorm";
 import { User } from "./user";
 
@@ -19,7 +20,8 @@ export class UserService {
     const user = repository.findOne({
       where: {
         id
-      }
+      },
+      relations: ["responses"]
     })
     return user;
   }
