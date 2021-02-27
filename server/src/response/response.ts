@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Prompt } from "../prompt/prompt";
+import { Clue } from "../clue/clue";
 import { User } from "../user/user";
 
 @Entity()
@@ -14,9 +14,9 @@ export class Response {
   @Field(type => User)
   user: User
 
-  @ManyToOne(() => Prompt)
-  @Field(type => Prompt)
-  prompt: Prompt
+  @ManyToOne(() => Clue)
+  @Field(type => Clue)
+  clue: Clue
 
   @Column()
   @Field(type => String)

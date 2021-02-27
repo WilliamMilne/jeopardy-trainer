@@ -3,34 +3,34 @@ import { CategoryService } from "src/category/category.service";
 import { Episode } from "src/episode/episode";
 import { EpisodeService } from "src/episode/episode.service";
 import { Connection } from "typeorm";
-import { NewPromptInput } from "./new-prompt.input";
-import { Prompt } from "./prompt";
+import { NewClueInput } from "./new-clue.input";
+import { Clue } from "./clue";
 
 @Injectable()
-export class PromptService {
+export class ClueService {
   constructor(private connection: Connection, private episodeService: EpisodeService, private categoryService: CategoryService) {
 
   }
-  async create(input: NewPromptInput): Promise<Prompt> {
+  async create(input: NewClueInput): Promise<Clue> {
     // TODO: need to create category and episode if they don't
     // exist yet? and then via their return values
     // pass those along to the input instead I think
     const episode = await this.episodeService.createOrGet(input.episode);
     const category = await this.categoryService.createOrGet(input.category, episode);
 
-    const newInput: Prompt = {
-      prompt: input.prompt,
+    const newInput: Clue = {
+      clue: input.clue,
       point_value: input.point_value,
       response: input.response,
       episode,
       category
     }
-    const repository = await this.connection.getRepository(Prompt);
-    const prompt = await repository.save(newInput);
-    return prompt;
+    const repository = await this.connection.getRepository(Clue);
+    const clue = await repository.save(newInput);
+    return clue;
   }
-  async findOneById(id: number): Promise<Prompt> {
-    const repository = await this.connection.getRepository(Prompt);
+  async findOneById(id: number): Promise<Clue> {
+    const repository = await this.connection.getRepository(Clue);
     const user = await repository.findOne({
       where: {
         id
@@ -38,10 +38,10 @@ export class PromptService {
     })
     return user;
   }
-  async findAll(args: any): Promise<Prompt[]> {
-    const repo = await this.connection.getRepository(Prompt);
-    const prompts = repo.find(args);
-    return prompts;
+  async findAll(args: any): Promise<Clue[]> {
+    const repo = await this.connection.getRepository(Clue);
+    const clues = repo.find(args);
+    return clues;
   }
 
 }

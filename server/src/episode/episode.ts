@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Category } from "src/category/category";
 import { CategoryService } from "src/category/category.service";
-import { Prompt } from "src/prompt/prompt";
+import { Clue } from "src/clue/clue";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -11,7 +11,7 @@ export class Episode {
   @Field(type => Int)
   id?: number
 
-  // I think the jarchiveid should only be used for episode and prompt creation
+  // I think the jarchiveid should only be used for episode and clue creation
   // but there really shouldn't be a reason for the graphql api to access it
   // hence, not tagging it with graphql @field tag. 
   @Column()
@@ -22,11 +22,11 @@ export class Episode {
   name: string
 
   @OneToMany(
-    () => Prompt, 
-    prompt => prompt.episode
+    () => Clue, 
+    clue => clue.episode
   )
-  @Field(type => [Prompt])
-  prompts: Prompt[]
+  @Field(type => [Clue])
+  clues: Clue[]
 
   @OneToMany(
     () => Category,

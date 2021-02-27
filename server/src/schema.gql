@@ -3,21 +3,30 @@
 # ------------------------------------------------------
 
 type Category {
+  clues: [Clue!]!
   episode: Episode!
   id: Int!
   name: String!
-  prompts: [Prompt!]!
+}
+
+type Clue {
+  category: Category!
+  clue: String!
+  episode: Episode!
+  id: Int!
+  point_value: Int!
+  response: String!
 }
 
 type Episode {
   categories: [Category!]!
+  clues: [Clue!]!
   id: Int!
   name: String!
-  prompts: [Prompt!]!
 }
 
 type Mutation {
-  addPrompt(promptInput: NewPromptInput!): Prompt!
+  addClue(clueInput: NewClueInput!): Clue!
   addUser(name: String!): User!
 }
 
@@ -25,31 +34,22 @@ input NewCategoryInput {
   name: String!
 }
 
+input NewClueInput {
+  category: NewCategoryInput!
+  clue: String!
+  episode: NewEpisodeInput!
+  point_value: Int!
+  response: String!
+}
+
 input NewEpisodeInput {
   jArchiveId: String!
   name: String!
 }
 
-input NewPromptInput {
-  category: NewCategoryInput!
-  episode: NewEpisodeInput!
-  point_value: Int!
-  prompt: String!
-  response: String!
-}
-
-type Prompt {
-  category: Category!
-  episode: Episode!
-  id: Int!
-  point_value: Int!
-  prompt: String!
-  response: String!
-}
-
 type Query {
+  clue(id: Float!): Clue!
   episode(id: Float!): Episode!
-  prompt(id: Float!): Prompt!
   user(id: Float!): User!
 }
 

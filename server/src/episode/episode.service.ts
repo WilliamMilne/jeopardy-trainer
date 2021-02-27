@@ -11,7 +11,7 @@ export class EpisodeService {
       where: {
         id: id
       },
-      relations: ["categories", "prompts"]
+      relations: ["categories", "clues"]
     })
     if (!episode) {
       throw new NotFoundException(id);

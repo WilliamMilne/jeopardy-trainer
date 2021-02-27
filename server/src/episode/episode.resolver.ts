@@ -1,12 +1,11 @@
 import { NotFoundException } from "@nestjs/common";
 import { Args, Resolver, Query } from "@nestjs/graphql";
-import { PromptService } from "src/prompt/prompt.service";
 import { Episode } from "./episode";
 import { EpisodeService } from "./episode.service";
 
 @Resolver(of => Episode)
 export class EpisodeResolver {
-  constructor(private readonly episodeService: EpisodeService, private readonly promptService: PromptService) {}
+  constructor(private readonly episodeService: EpisodeService) {}
 
   @Query(returns => Episode)
   async episode(@Args('id') id: number): Promise<Episode> {

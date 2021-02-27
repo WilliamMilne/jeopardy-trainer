@@ -4,13 +4,13 @@ import { NewCategoryInput } from "src/category/category.input";
 import { Episode } from "src/episode/episode";
 import { NewEpisodeInput } from "src/episode/episode.input";
 
-// Note: this is copied pretty much right from prompt.ts, but I removed the
+// Note: this is copied pretty much right from clue.ts, but I removed the
 // typeorm decorators. There are reasons for this, discussed here: 
 // https://github.com/MichalLytek/type-graphql/issues/76
 @InputType()
-export class NewPromptInput {
+export class NewClueInput {
   @Field(type => String)
-  prompt: string;
+  clue: string;
 
   @Field(type => String)
   response: string;

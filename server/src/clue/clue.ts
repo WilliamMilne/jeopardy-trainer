@@ -5,14 +5,14 @@ import { Episode } from "../episode/episode";
 
 @Entity()
 @ObjectType()
-export class Prompt {
+export class Clue {
   @PrimaryGeneratedColumn()
   @Field(type => Int)
   id?: number;
 
   @Column()
   @Field(type => String)
-  prompt: string;
+  clue: string;
 
   @Column()
   @Field(type => String)
