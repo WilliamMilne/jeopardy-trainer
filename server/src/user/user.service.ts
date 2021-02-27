@@ -21,7 +21,7 @@ export class UserService {
       where: {
         id
       },
-      relations: ["responses"]
+      relations: ["responses", "responses.clue"]
     })
     return user;
   }
