@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './ClueView.module.scss';
 
-import { Tile } from 'carbon-components-react'
+import { Button, TextInput, Tile } from 'carbon-components-react'
 import { gql, useQuery } from '@apollo/client';
 import { Clue } from '../../generated/graphql';
 
 const GET_CLUE = gql`
-  query GetClue {
-    clue(id:1) {
+  query GetClue($id: Float!) {
+    clue(id: $id) {
       clue
       category {
         name
@@ -15,28 +15,36 @@ const GET_CLUE = gql`
       episode {
         name
       }
+      point_value
     }
   }
 `
 
-function ClueV() {
-  const { loading, error, data } = useQuery(GET_CLUE);
+interface IClueViewProps {
+  clueId: number
+}
+
+function ClueView(props: IClueViewProps) {
+  const { loading, error, data } = useQuery(GET_CLUE, {
+    variables: {
+      id: props.clueId
+    }
+  });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message} {error.graphQLErrors.toString()}</p>;
   console.log(data);
-  const { category, episode, clue } = data.clue;
-
+  const { category, episode, clue, point_value } = data.clue;
   return (
     <div>
-      <p>{clue} from {category.name} in {episode.name}</p>
+      <Tile>
+        <p>Category: {category.name}</p>
+        <p>Value: ${point_value}</p>
+        <p>{clue}</p>
+        <TextInput id={"clueInput"+props.clueId} labelText="Enter your response"></TextInput>
+        <Button>Submit</Button>
+      </Tile>
     </div>
   )
 }
 
-// const ClueView: React.FC = () => (
-//   <div className={styles.ClueView} data-testid="ClueView">
-//     <Tile></Tile>
-//   </div>
-// );
-
-export default ClueV;
+export default ClueView;
