@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  clues: [Clue!]!
+  episode: Episode!
+  id: Int!
+  name: String!
+}
+
+type Clue {
+  category: Category!
+  clue: String!
+  correctResponse: String!
+  episode: Episode!
+  id: Int!
+  point_value: Int!
+}
+
+type Episode {
+  categories: [Category!]!
+  clues: [Clue!]!
+  id: Int!
+  name: String!
+}
+
+type Mutation {
+  addClue(clueInput: NewClueInput!): Clue!
+  addUser(name: String!): User!
+  submitResponse(responseInput: NewResponseInput!): Response!
+}
+
+input NewCategoryInput {
+  name: String!
+}
+
+input NewClueInput {
+  category: NewCategoryInput!
+  clue: String!
+  correctResponse: String!
+  episode: NewEpisodeInput!
+  point_value: Int!
+}
+
+input NewEpisodeInput {
+  jArchiveId: String!
+  name: String!
+}
+
+input NewResponseInput {
+  clueId: ID!
+  userId: ID!
+  user_response: String!
+}
+
+type Query {
+  clue(id: Float!): Clue!
+  episode(id: Float!): Episode!
+  response(id: Float!): Response!
+  user(id: Float!): User!
+}
+
+type Response {
+  clue: Clue!
+  id: Int!
+  response_correct: Boolean!
+  user: User!
+  user_response: String!
+}
+
+type User {
+  id: Int!
+  name: String!
+  responses: [Response!]!
+}
