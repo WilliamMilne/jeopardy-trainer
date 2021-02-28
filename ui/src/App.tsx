@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss'
 
-import { Button } from 'carbon-components-react'
+import { Button, Header, HeaderName } from 'carbon-components-react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import ClueView from './components/ClueView/ClueView';
 
@@ -14,7 +14,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <ClueView clueId={8}></ClueView>
+        <Header aria-label="J-Trainer!">
+          <HeaderName href="#" prefix="">
+            J-Trainer!
+          </HeaderName>
+        </Header>
+        <ClueView clueId={6}></ClueView>
       </div>
     </ApolloProvider>
   );

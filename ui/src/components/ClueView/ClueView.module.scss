@@ -2,18 +2,21 @@
 
 .Tile {
   max-width: 750px;
+  margin-top: 49px;
 }
 
 .category {
   position:absolute;
   top: 0px;
   left: 0px;
+  padding-left:8px;
 }
 
 .value {
   position: absolute;
   top: 0px;
   right: 0px;
+  padding-right:8px;
 }
 
 .clue {
