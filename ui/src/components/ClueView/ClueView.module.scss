@@ -1,1 +1,31 @@
 .ClueView {}
+
+.Tile {
+  max-width: 750px;
+}
+
+.category {
+  position:absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.value {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.clue {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.response {
+  max-width: 300px;
+  margin: auto auto
+}
+
+.submit {
+  margin-top: 16px
+}

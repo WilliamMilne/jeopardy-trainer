@@ -92,22 +92,22 @@ export type Query = {
 
 
 export type QueryClueArgs = {
-  id: Scalars['Float'];
+  id: Scalars['Int'];
 };
 
 
 export type QueryEpisodeArgs = {
-  id: Scalars['Float'];
+  id: Scalars['Int'];
 };
 
 
 export type QueryResponseArgs = {
-  id: Scalars['Float'];
+  id: Scalars['Int'];
 };
 
 
 export type QueryUserArgs = {
-  id: Scalars['Float'];
+  id: Scalars['Int'];
 };
 
 export type Response = {

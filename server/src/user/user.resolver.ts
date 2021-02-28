@@ -1,6 +1,6 @@
 // import { PubSub } from "apollo-server-express";
 import { NotFoundException } from "@nestjs/common";
-import { Resolver, Query, Args, Mutation } from "@nestjs/graphql";
+import { Resolver, Query, Args, Mutation, Int } from "@nestjs/graphql";
 import { User } from "./user";
 import { UserService } from "./user.service";
 
@@ -11,7 +11,7 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(returns => User)
-  async user(@Args('id') id: number): Promise<User> {
+  async user(@Args('id', { type: () => Int }) id: number): Promise<User> {
     const user = await this.userService.findOneById(id);
     if (!user){
       throw new NotFoundException(id);
