@@ -37,7 +37,12 @@ function ClueContainer(props: IClueContainerProps) {
     }
   });
 
-  const [responseData, setResponseData] = useState(undefined);
+  const [responseData, setResponseData] = useState({
+    submitResponse: {
+      response_correct: false
+    },
+    responded: false
+  });
 
   console.log("ResponseData", responseData);
 
@@ -48,10 +53,13 @@ function ClueContainer(props: IClueContainerProps) {
   }
 
   let content;
-  if (!responseData) {
+  if (!responseData.responded) {
     content = <ClueWithInput clue={data.clue.clue} clueId={clueId} clueAnsweredCallback={
       (data: any) => {
-        setResponseData(data);
+        setResponseData({
+          ...data,
+          responded: true
+        });
       }}></ClueWithInput>
   } else {
     content = <div><p>answered</p></div>
