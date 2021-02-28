@@ -1,4 +1,3 @@
-import { gql, useMutation } from '@apollo/client';
 import { Button, TextInput } from 'carbon-components-react';
 import React, { useState } from 'react';
 import styles from './ClueWithInput.module.scss';

@@ -1,7 +1,9 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import { Loading, Tile } from 'carbon-components-react';
-import React, { useState } from 'react';
+import { Button, Loading, Tile } from 'carbon-components-react';
+import React from 'react';
 import ClueWithInput from '../ClueWithInput/ClueWithInput';
+import CorrectResponse from '../CorrectResponse/CorrectResponse';
+import IncorrectResponse from '../IncorrectResponse/IncorrectResponse';
 import styles from './ClueContainer.module.scss';
 
 // const ClueContainer: React.FC = () => (
@@ -32,13 +34,18 @@ const SUBMIT_RESPONSE = gql`
       clueId: $clue,
       user_response: $response
     }) {
+      user_response
       response_correct
+      clue {
+        correctResponse
+      }
     }
   }
 `
 
 interface IClueContainerProps {
   clueId: number
+  switchToNextClue: any
 }
 
 function ClueContainer(props: IClueContainerProps) {
@@ -51,8 +58,6 @@ function ClueContainer(props: IClueContainerProps) {
 
   const [submitResponse, { data: responseData }] = useMutation(SUBMIT_RESPONSE);
 
-  console.log("ResponseData", responseData);
-
   if (loading) {
     return <Loading></Loading>
   } else if (error) {
@@ -64,9 +69,9 @@ function ClueContainer(props: IClueContainerProps) {
     content = <ClueWithInput clue={data.clue.clue} clueId={clueId} clueAnsweredCallback={submitResponse}></ClueWithInput>
   } else {
     if (responseData.submitResponse.response_correct) {
-      content = <p className={styles.Tile}>Great job!</p>
+      content = <CorrectResponse correctResponse={responseData.submitResponse.clue.correctResponse}></CorrectResponse>
     } else {
-      content = <p className={styles.Tile}>Oops you're wrong.</p>
+      content = <IncorrectResponse userResponse={responseData.submitResponse.user_response} correctResponse={responseData.submitResponse.clue.correctResponse}></IncorrectResponse>
     }
   }
 
@@ -76,6 +81,7 @@ function ClueContainer(props: IClueContainerProps) {
         <p className={styles.category}>Category: {data.clue.category.name}</p>
         <p className={styles.value}>Value: ${data.clue.point_value}</p>
         <div>{content}</div>
+        {responseData !== undefined && <Button onClick={props.switchToNextClue} className={styles.nextClue}>Next clue!</Button>}
       </Tile>
     </div>
   )

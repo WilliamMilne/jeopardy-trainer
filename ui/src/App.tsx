@@ -10,6 +10,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+function switchToNextClue() {
+  console.log("hello")
+}
+
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -20,7 +24,7 @@ function App() {
           </HeaderName>
         </Header>
         <div className="body">
-          <ClueContainer clueId={6}></ClueContainer>
+          <ClueContainer switchToNextClue={switchToNextClue} clueId={6}></ClueContainer>
         </div>
       </div>
     </ApolloProvider>
