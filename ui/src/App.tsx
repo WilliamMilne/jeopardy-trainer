@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.scss'
 
-import { Button, Header, HeaderName } from 'carbon-components-react'
+import { Header, HeaderName } from 'carbon-components-react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import ClueView from './components/ClueView/ClueView';
+import ClueContainer from './components/ClueContainer/ClueContainer';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -19,7 +19,9 @@ function App() {
             J-Trainer!
           </HeaderName>
         </Header>
-        <ClueView clueId={6}></ClueView>
+        <div className="body">
+          <ClueContainer clueId={6}></ClueContainer>
+        </div>
       </div>
     </ApolloProvider>
   );

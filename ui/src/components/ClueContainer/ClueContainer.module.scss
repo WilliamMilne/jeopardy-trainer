@@ -1,8 +1,7 @@
-.ClueView {}
+.ClueContainer {}
 
 .Tile {
   max-width: 750px;
-  margin-top: 49px;
 }
 
 .category {
@@ -17,18 +16,4 @@
   top: 0px;
   right: 0px;
   padding-right:8px;
-}
-
-.clue {
-  padding-top: 32px;
-  padding-bottom: 32px;
-}
-
-.response {
-  max-width: 300px;
-  margin: auto auto
-}
-
-.submit {
-  margin-top: 16px
 }
