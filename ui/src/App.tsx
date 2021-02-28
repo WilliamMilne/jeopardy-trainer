@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss'
 
 import { Header, HeaderName } from 'carbon-components-react'
@@ -10,11 +10,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-function switchToNextClue() {
-  console.log("hello")
-}
-
 function App() {
+  let [clueId, setClueId] = useState(4);
   return (
     <ApolloProvider client={client}>
       <div className="App">
@@ -24,7 +21,7 @@ function App() {
           </HeaderName>
         </Header>
         <div className="body">
-          <ClueContainer switchToNextClue={switchToNextClue} clueId={6}></ClueContainer>
+          <ClueContainer key={clueId} switchToNextClue={() => setClueId(clueId + 1)} clueId={clueId}></ClueContainer>
         </div>
       </div>
     </ApolloProvider>
