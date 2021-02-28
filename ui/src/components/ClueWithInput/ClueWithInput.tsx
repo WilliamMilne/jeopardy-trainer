@@ -9,18 +9,6 @@ import styles from './ClueWithInput.module.scss';
 //   </div>
 // );
 
-const SUBMIT_RESPONSE = gql`
-  mutation SubmitResponse($user: ID!, $clue: ID!, $response: String!) {
-    submitResponse(responseInput: {
-      userId: $user,
-      clueId: $clue,
-      user_response: $response
-    }) {
-      response_correct
-    }
-  }
-`
-
 interface IClueWithInputProps {
   clue: string
   clueId: number
@@ -30,12 +18,6 @@ interface IClueWithInputProps {
 function ClueWithInput(props: IClueWithInputProps) {
   const { clue, clueId } = props;
   const [response, setResponse] = useState('');
-  const [submitResponse, { data }] = useMutation(SUBMIT_RESPONSE);
-
-  if (data !== undefined) {
-    // the user has answered the clue, now we notify the parent to switch to feedback for the user.
-    props.clueAnsweredCallback(data);
-  }
 
   return (
     <div>
@@ -48,7 +30,7 @@ function ClueWithInput(props: IClueWithInputProps) {
           onKeyPress={(event) => {
             var code = event.key;
             if (code === "Enter") {
-              submitResponse({
+              props.clueAnsweredCallback({
                 variables: {
                   user: 1,
                   clue: clueId,
@@ -60,7 +42,7 @@ function ClueWithInput(props: IClueWithInputProps) {
         ></TextInput>
       </div>
       <Button className={styles.submit} onClick={() => {
-        submitResponse({
+        props.clueAnsweredCallback({
           variables: {
             user: 1,
             clue: clueId,

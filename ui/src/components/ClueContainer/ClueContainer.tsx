@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { Loading, Tile } from 'carbon-components-react';
 import React, { useState } from 'react';
 import ClueWithInput from '../ClueWithInput/ClueWithInput';
@@ -25,6 +25,18 @@ const GET_CLUE = gql`
   }
 `
 
+const SUBMIT_RESPONSE = gql`
+  mutation SubmitResponse($user: ID!, $clue: ID!, $response: String!) {
+    submitResponse(responseInput: {
+      userId: $user,
+      clueId: $clue,
+      user_response: $response
+    }) {
+      response_correct
+    }
+  }
+`
+
 interface IClueContainerProps {
   clueId: number
 }
@@ -37,12 +49,7 @@ function ClueContainer(props: IClueContainerProps) {
     }
   });
 
-  const [responseData, setResponseData] = useState({
-    submitResponse: {
-      response_correct: false
-    },
-    responded: false
-  });
+  const [submitResponse, { data: responseData }] = useMutation(SUBMIT_RESPONSE);
 
   console.log("ResponseData", responseData);
 
@@ -53,16 +60,14 @@ function ClueContainer(props: IClueContainerProps) {
   }
 
   let content;
-  if (!responseData.responded) {
-    content = <ClueWithInput clue={data.clue.clue} clueId={clueId} clueAnsweredCallback={
-      (data: any) => {
-        setResponseData({
-          ...data,
-          responded: true
-        });
-      }}></ClueWithInput>
+  if (!responseData) {
+    content = <ClueWithInput clue={data.clue.clue} clueId={clueId} clueAnsweredCallback={submitResponse}></ClueWithInput>
   } else {
-    content = <div><p>answered</p></div>
+    if (responseData.submitResponse.response_correct) {
+      content = <p className={styles.Tile}>Great job!</p>
+    } else {
+      content = <p className={styles.Tile}>Oops you're wrong.</p>
+    }
   }
 
   return (
@@ -76,13 +81,6 @@ function ClueContainer(props: IClueContainerProps) {
   )
 }
 
-// if (responseData !== undefined) {
-//   console.log(responseData);
-//   if (responseData.submitResponse.response_correct) {
-//     return <p className={styles.Tile}>Great job!</p>
-//   } else {
-//     return <p className={styles.Tile}>Oops you're wrong.</p>
-//   }
-// }
+
 
 export default ClueContainer;
