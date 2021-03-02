@@ -20,7 +20,7 @@ class clue_obj():
         self.amount = amount
         self.category = category
         self.round_id = round_id
-        self.is_daily_double = is_daily_doubleself.categories[round_id][i%6]
+        self.is_daily_double = is_daily_double
 
 class j_scraper():
     """
@@ -37,6 +37,7 @@ class j_scraper():
         self.round_two_id = "double_jeopardy_round"
         self.round_final_id = "final_jeopardy_round"
 
+        self.game_id = game_id
         self.game_soup = None
         self.episode_num = ''
         self.episode_date = ''
