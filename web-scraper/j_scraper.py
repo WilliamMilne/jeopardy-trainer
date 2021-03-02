@@ -133,6 +133,7 @@ class j_scraper():
         category = round_soup.find(class_="category").text.strip()
         clue = round_soup.find(id="clue_FJ").text
         response = round_soup.find(class_="category").div.attrs['onmouseover'].split('correct_response')[1].split('</em>')[0]
+        # TODO: break out into function
         if '(or ' in response:
             response = response.split('(or ')[0]
         if '<i>' in response:
