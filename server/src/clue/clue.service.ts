@@ -31,7 +31,8 @@ export class ClueService {
     const user = await repository.findOne({
       where: {
         id
-      }
+      },
+      relations: ['category', 'episode']
     })
     return user;
   }

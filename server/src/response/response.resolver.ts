@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver, Query } from "@nestjs/graphql";
+import { Args, Mutation, Resolver, Query, Int } from "@nestjs/graphql";
 import { NewResponseInput } from "./new-response.input";
 import { ResponseService } from "./response.service";
 import { Response } from "./response"
@@ -9,7 +9,7 @@ export class ResponseResolver {
   constructor(private readonly responseService: ResponseService) { }
 
   @Query(returns => Response)
-  async response(@Args('id') id: number): Promise<Response> {
+  async response(@Args('id', { type: () => Int }) id: number): Promise<Response> {
     const response = await this.responseService.findOneById(id);
     if (!response) {
       throw new NotFoundException(id);

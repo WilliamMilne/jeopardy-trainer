@@ -55,10 +55,10 @@ input NewResponseInput {
 }
 
 type Query {
-  clue(id: Float!): Clue!
-  episode(id: Float!): Episode!
-  response(id: Float!): Response!
-  user(id: Float!): User!
+  clue(id: Int!): Clue!
+  episode(id: Int!): Episode!
+  response(id: Int!): Response!
+  user(id: Int!): User!
 }
 
 type Response {

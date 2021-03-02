@@ -1,6 +1,6 @@
 // import { PubSub } from "apollo-server-express";
 import { NotFoundException } from "@nestjs/common";
-import { Resolver, Query, Args, Mutation } from "@nestjs/graphql";
+import { Resolver, Query, Args, Mutation, Int } from "@nestjs/graphql";
 import { NewClueInput } from "./new-clue.input";
 import { Clue } from "./clue";
 import { ClueService } from "./clue.service";
@@ -12,7 +12,7 @@ export class ClueResolver {
   constructor(private readonly clueService: ClueService) {}
 
   @Query(returns => Clue)
-  async clue(@Args('id') id: number): Promise<Clue> {
+  async clue(@Args('id', { type: () => Int }) id: number): Promise<Clue> {
     const clue = await this.clueService.findOneById(id);
     if (!clue){
       throw new NotFoundException(id);
