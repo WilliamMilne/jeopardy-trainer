@@ -20,7 +20,7 @@ class clue_obj():
         self.amount = amount
         self.category = category
         self.round_id = round_id
-        self.is_daily_double = is_daily_double
+        self.is_daily_double = is_daily_doubleself.categories[round_id][i%6]
 
 class j_scraper():
     """
@@ -54,7 +54,7 @@ class j_scraper():
         self.get_game_soup()
         title = self.game_soup.h1.text
 
-        self.episode_num = title.split('#')[1]
+        self.episode_num = title.split('#')[1].split(' ')[0]
         self.episode_year = int(title[-4:])
         self.episode_date = title.split(' - ')[1]
         
