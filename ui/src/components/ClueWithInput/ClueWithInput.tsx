@@ -1,5 +1,5 @@
 import { Button, TextInput } from 'carbon-components-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ClueWithInput.module.scss';
 
 // const ClueWithInput: React.FC = () => (
@@ -18,11 +18,17 @@ function ClueWithInput(props: IClueWithInputProps) {
   const { clue, clueId } = props;
   const [response, setResponse] = useState('');
 
+  useEffect(() => {
+
+  })
+
   return (
     <div>
       <h2 className={styles.clue}>{clue}</h2>
       <div className={styles.response}>        
         <TextInput 
+          autoFocus
+          autoComplete="off"
           id={"clueInput"+clueId} 
           labelText="Enter your response"
           onChange={event => setResponse(event.target.value)}  
