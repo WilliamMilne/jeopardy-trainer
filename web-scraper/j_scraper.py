@@ -140,7 +140,7 @@ class j_scraper():
             is_daily_double=False
         ))
     
-    def parse_response(response: str):
+    def parse_response(self, response: str):
         """
         Response may have these issues:
         - the <i> tag may be inside the text so we remove this
