@@ -102,24 +102,22 @@ class j_scraper():
         all_tr = round_soup.find_all(class_="clue")
         for i, tr in enumerate(all_tr):
             is_daily_double = False
-            clue = tr.find(class_='clue_text').text
+            try:
+                clue = tr.find(class_='clue_text').text
+            except AttributeError:
+                # If they don't finish a category in the game the questions don't appear
+                # We continue on to the next box
+                continue
             try:
                 amount = int(tr.find(class_='clue_value').text[1:])
             except AttributeError:
-                # clue_value is not available for daily doubles
+                # clue_value class is not available for daily doubles
                 amount = (i//6+1) * 200 * (2 if 'double' in round_id else 1)
                 is_daily_double = True
             response = tr.div.attrs['onmouseover'].split('"correct_response">')[1].split('</em>')[0]
-            if '(or ' in response:
-                # This is a case where there are multiple accepted answers
-                # We will only process the first as of now
-                response = response.split('(or ')[0]
-            if '<i>' in response:
-                response = response.split('<i>')[1].split('</i>')[0]
-
             self.clues.append(clue_obj(
                 clue,
-                response,
+                self.parse_response(response),
                 amount,
                 self.categories[round_id][i%6],
                 round_id,
@@ -133,16 +131,23 @@ class j_scraper():
         category = round_soup.find(class_="category").text.strip()
         clue = round_soup.find(id="clue_FJ").text
         response = round_soup.find(class_="category").div.attrs['onmouseover'].split('correct_response')[1].split('</em>')[0]
-        # TODO: break out into function
-        if '(or ' in response:
-            response = response.split('(or ')[0]
-        if '<i>' in response:
-            response = response.split('<i>')[1].split('</i>')[0]
         self.clues.append(clue_obj(
             clue=clue,
-            response=response,
+            response=self.parse_response(response),
             amount=0,
             category=category,
             round_id=round_id,
             is_daily_double=False
         ))
+    
+    def parse_response(response: str):
+        """
+        Response may have these issues:
+        - the <i> tag may be inside the text so we remove this
+        - "or" may appear which means there are two possible responses, we only take the first currently
+        """
+        if '(or ' in response:
+            response = response.split('(or ')[0]
+        if '<i>' in response:
+            response = response.split('<i>')[1].split('</i>')[0]
+        return response
