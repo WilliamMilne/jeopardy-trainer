@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "internalConsole",
-            "args": ["1", "3"]
+            "args": ["1", "1000"]
         }
     ]
 }

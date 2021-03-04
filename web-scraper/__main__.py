@@ -21,5 +21,8 @@ if __name__ == "__main__":
         # Fall 2001 is when point values changed, we will only use games starting from 2002
         if j_scraper_obj.episode_year >= 2002:
             j_scraper_obj.process_clues()
+            print(f'Completed processing for id: {game_id}')
+        else:
+            print(f'Game id {game_id} is from year: {j_scraper_obj.episode_year}, and will not be processed.')
 
     print('done')
