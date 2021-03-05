@@ -39,7 +39,7 @@ export default function Navigation() {
         </Route>
         <Route exact path="/episodes">
           <div className={styles.bodyContent}>
-            <EpisodeSelection></EpisodeSelection>
+            <EpisodeSelection userId={1}></EpisodeSelection>
           </div>
         </Route>
         <Route path="/episodes/:id">
