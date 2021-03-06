@@ -5,7 +5,7 @@ class graphql_wrapper():
     """
 
     """
-    def __init__():
+    def __init__(self):
         """
         Creates graphql client
         """
@@ -17,7 +17,7 @@ class graphql_wrapper():
         """
         pass
 
-    def create_clue(self, clue: clue_obj):
+    def create_clue(self, clue: clue_obj, date: str, game_id: int):
         """
         Sends clue to graphql endpoint
         """
@@ -38,16 +38,13 @@ class graphql_wrapper():
             }
         """
         variables = {
-            "category": clue_obj.category,
-            "date:": clue_obj.episode_date,
-            "game_id": clue_obj.game_id,
-            "amount": clue_obj.amount,
-            "clue": clue_obj.clue,
-            "response": clue_obj.response
+            "category": clue.category,
+            "date:": date,
+            "game_id": game_id,
+            "amount": clue.amount,
+            "clue": clue.clue,
+            "response": clue.response
         }
 
-        resp = client.execute(mutation=mutation, variables=variables)
+        resp = self.client.execute(query=mutation, variables=variables)
         print(resp)
-
-
-    
