@@ -8,7 +8,7 @@ export class EpisodeService {
   async getAllEpisodes(): Promise<Episode[]> {
     const repo = await this.connection.getRepository(Episode);
     const episodes = await repo.find({
-      relations: ["categories", "clues", "categories.clues"]
+      relations: ["categories", "clues"]
     });
     if (!episodes) {
       throw new NotFoundException();

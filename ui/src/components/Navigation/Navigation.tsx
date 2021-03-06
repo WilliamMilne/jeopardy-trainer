@@ -1,10 +1,13 @@
-import { Header, HeaderName } from 'carbon-components-react';
+import { Header, HeaderContainer, HeaderMenu, HeaderMenuButton, HeaderMenuItem, HeaderName, HeaderNavigation, HeaderSideNavItems, SideNav, SideNavItems, SkipToContent } from 'carbon-components-react';
 import React from 'react';
 import styles from './Navigation.module.scss';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-router-dom"
 import UserDashboard from '../UserDashboard/UserDashboard';
+import CategorySelection from '../CategorySelection/CategorySelection';
+import EpisodeSelection from '../EpisodeSelection/EpisodeSelection';
+import EpisodeView from '../EpisodeView/EpisodeView';
+import CategoryView from '../CategoryView/CategoryView';
 import ClueContainer from '../ClueContainer/ClueContainer';
-import CustomTrainingConfig from '../CustomTrainingConfig/CustomTrainingConfig';
 
 export default function Navigation() {
   return (
@@ -15,7 +18,8 @@ export default function Navigation() {
         </HeaderName>
         <NavLink className={styles.navLink} to="/">Home</NavLink>
         <NavLink className={styles.navLink} to="/dashboard">Dashboard</NavLink>
-        <NavLink className={styles.navLink} to="/training">Custom Training</NavLink>
+        <NavLink className={styles.navLink} to="/episodes">Episodes</NavLink>
+        <NavLink className={styles.navLink} to="/categories">Categories</NavLink>
       </Header>
       <Switch>
         <Route path="/dashboard">
@@ -23,9 +27,24 @@ export default function Navigation() {
             <UserDashboard></UserDashboard>
           </div>
         </Route>
-        <Route exact path="/training">
+        <Route exact path="/categories">
           <div className={styles.bodyContent}>
-            <CustomTrainingConfig></CustomTrainingConfig>
+            <CategorySelection></CategorySelection>
+          </div>
+        </Route>
+        <Route path="/categories/:id">
+          <div className={styles.bodyContent}>
+            <CategoryView></CategoryView>
+          </div>
+        </Route>
+        <Route exact path="/episodes">
+          <div className={styles.bodyContent}>
+            <EpisodeSelection userId={1}></EpisodeSelection>
+          </div>
+        </Route>
+        <Route path="/episodes/:id">
+          <div className={styles.bodyContent}>
+            <EpisodeView></EpisodeView>
           </div>
         </Route>
         <Route path="/clues/:id">
