@@ -17,7 +17,12 @@ class graphql_wrapper():
         """
         Takes in a j_scraper object and sends all relevant data to graphql.
         """
-        pass
+        for clue in game.clues:
+            self.create_clue(
+                clue,
+                game.episode_date,
+                game.game_id
+            )
 
     def create_clue(self, clue: clue_obj, date: str, game_id: int):
         """
@@ -47,4 +52,3 @@ class graphql_wrapper():
 
 
         resp = self.client.execute(mutation, variable_values=params)
-        print(resp)
