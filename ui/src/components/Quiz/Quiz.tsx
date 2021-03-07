@@ -24,10 +24,6 @@ const GET_CLUES_FOR_EPISODE = gql`
   }
 `
 
-// Quiz accepts a type, which is either episode or category
-// it then gets the list of clues from that episode or category
-// and instantiates the cluecontainer and then allows the user to progress
-// through the clues in that episode or category.
 export default function Quiz(props: IQuizProps) {
   const { quizType } = props;
   const { quizId } = useParams<IQuizUrlProps>();
