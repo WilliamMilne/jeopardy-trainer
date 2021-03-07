@@ -5,9 +5,8 @@ import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-rou
 import UserDashboard from '../UserDashboard/UserDashboard';
 import CategorySelection from '../CategorySelection/CategorySelection';
 import EpisodeSelection from '../EpisodeSelection/EpisodeSelection';
-import EpisodeView from '../EpisodeView/EpisodeView';
-import CategoryView from '../CategoryView/CategoryView';
 import ClueContainer from '../ClueContainer/ClueContainer';
+import Quiz from '../Quiz/Quiz';
 
 export default function Navigation() {
   return (
@@ -34,7 +33,7 @@ export default function Navigation() {
         </Route>
         <Route path="/categories/:id">
           <div className={styles.bodyContent}>
-            <CategoryView></CategoryView>
+            <Quiz quizType={'category'}></Quiz>
           </div>
         </Route>
         <Route exact path="/episodes">
@@ -42,14 +41,9 @@ export default function Navigation() {
             <EpisodeSelection userId={1}></EpisodeSelection>
           </div>
         </Route>
-        <Route path="/episodes/:id">
+        <Route path="/episodes/:quizId">
           <div className={styles.bodyContent}>
-            <EpisodeView></EpisodeView>
-          </div>
-        </Route>
-        <Route path="/clues/:id">
-          <div className={styles.bodyContent}>
-            <ClueContainer switchToNextClue={() => { console.log("switch")}}></ClueContainer>
+            <Quiz quizType={'episode'}></Quiz>
           </div>
         </Route>
       </Switch>
