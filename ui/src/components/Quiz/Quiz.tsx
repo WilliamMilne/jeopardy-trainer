@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Clue } from '../../generated/graphql';
+import { Clue, Episode } from '../../generated/graphql';
 import ClueContainer from '../ClueContainer/ClueContainer';
 import styles from './Quiz.module.scss';
 
@@ -19,10 +19,31 @@ const GET_CLUES_FOR_EPISODE = gql`
       id
       clues {
         id
+        category {
+          id
+        }
       }
     }
   }
 `
+
+function getOrderedClueIds(clues: Clue[]): number[] {
+  let result: number[] = [];
+  const categories: any = {};
+
+  for(let i = 0; i < clues.length; i++) {
+    if (categories[clues[i].category.id] === undefined) {
+      categories[clues[i].category.id] = [];
+    }
+    categories[clues[i].category.id].push(clues[i].id);
+  }
+
+  for(let index in categories) {
+    result = result.concat(categories[index]);
+  }
+
+  return result;
+}
 
 export default function Quiz(props: IQuizProps) {
   const { quizType } = props;
@@ -43,15 +64,11 @@ export default function Quiz(props: IQuizProps) {
   }
 
   if (episodeError) {
+    console.log(episodeError);
     return <p>Error.</p>
   }
 
-  let clueIds: number[] = []
-  if (quizType === 'episode') {
-    clueIds = episodeData.episode.clues.map((clue: Clue) => {
-      return clue.id
-    })
-  }
+  let clueIds = getOrderedClueIds(episodeData.episode.clues);
 
   return (
     <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
