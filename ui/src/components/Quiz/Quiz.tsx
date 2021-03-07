@@ -24,10 +24,6 @@ const GET_CLUES_FOR_EPISODE = gql`
   }
 `
 
-// const GET_CLUES_FOR_CATEGORY = gql`
-
-// `
-
 // Quiz accepts a type, which is either episode or category
 // it then gets the list of clues from that episode or category
 // and instantiates the cluecontainer and then allows the user to progress
@@ -46,27 +42,17 @@ export default function Quiz(props: IQuizProps) {
     skip: quizType === 'category'
   });
 
-  const { loading: categoryLoading, error: categoryError, data: categoryData } = useQuery(GET_CLUES_FOR_EPISODE,{
-    variables: {
-      id: quizIdInt
-    },
-    skip: quizType === 'episode'
-  });
-  if (episodeLoading || categoryLoading) {
+  if (episodeLoading) {
     return <p>Loading...</p>;
   }
 
-  if (episodeError || categoryError) {
+  if (episodeError) {
     return <p>Error.</p>
   }
 
   let clueIds: number[] = []
   if (quizType === 'episode') {
     clueIds = episodeData.episode.clues.map((clue: Clue) => {
-      return clue.id
-    })
-  } else if (quizType === 'category') {
-    clueIds = categoryData.category.clues.map((clue: Clue) => {
       return clue.id
     })
   }
