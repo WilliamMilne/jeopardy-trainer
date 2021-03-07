@@ -17,15 +17,6 @@ export class ResponseResolver {
     return response;
   }
 
-  @Query(returns => [Response])
-  async latestUserResponses(@Args('userId', { type: () => Int }) userId: number, @Args('clueIds', { type: () => [Int]}) clueIds: number[]): Promise<Response[]> {
-    const userResponses = await this.responseService.findUserResponses(userId, clueIds);
-    if (!userResponses) {
-      throw new NotFoundException();
-    }
-    return userResponses;
-  }
-
   @Mutation(returns => Response)
   async submitResponse(@Args('responseInput') responseInput: NewResponseInput): Promise<Response> {
     const response = await this.responseService.create(responseInput);

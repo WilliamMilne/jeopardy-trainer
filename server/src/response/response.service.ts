@@ -24,22 +24,6 @@ export class ResponseService {
     return response;
   }
 
-  // in future, add constraints to only get responses for the episodes we want to 
-  // look at?
-  async findUserResponses(userId: number, clueIds: number[]): Promise<Response[]> {
-    const repo = this.connection.getRepository(Response);
-    const userResponses = repo.find({
-      where: {
-        user: userId
-      },
-      relations: ["clue"],
-      order: {
-        user_response: "DESC"
-      }
-    });
-    return userResponses;
-  }
-
   async create(input: NewResponseInput): Promise<Response> {
     const clue = await this.clueService.findOneById(input.clueId);
     const user = await this.userService.findOneById(input.userId);
