@@ -16,6 +16,7 @@ interface IQuizUrlProps {
 const GET_CLUES_FOR_EPISODE = gql`
   query getCluesForEpisode($id: Int!) {
     episode(id: $id) {
+      id
       clues {
         id
       }
@@ -71,6 +72,6 @@ export default function Quiz(props: IQuizProps) {
   }
 
   return (
-    <ClueContainer key={clueIndex} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
+    <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
   )
 };

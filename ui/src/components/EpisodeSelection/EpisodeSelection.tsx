@@ -33,7 +33,7 @@ export default function EpisodeSelection(props: IEpisodeSelectionProps) {
   }
 
   const episodeList = episodeData.episodes.map((ep: Episode) => {
-    return <ClickableTile href={'/categories'}>{ep.name}</ClickableTile>
+    return <ClickableTile key={`episode-tile-${ep.id}`} href={'/episodes/' + ep.id}>{ep.name}</ClickableTile>
   })
 
   return (

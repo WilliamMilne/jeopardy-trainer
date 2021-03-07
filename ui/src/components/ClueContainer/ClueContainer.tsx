@@ -62,10 +62,7 @@ function ClueContainer(props: IClueContainerProps) {
   function handleKeyPress(e: any) {
     if (e.key === "Enter") {
       if (responseData !== undefined) {
-        console.log("switch to next clue");
         props.switchToNextClue();
-        responseData = undefined;
-        console.log(responseData);
       }
     }
   }
@@ -88,7 +85,6 @@ function ClueContainer(props: IClueContainerProps) {
   }
 
   let content;
-  console.log("HELLO", responseData);
   if (!responseData) {
     content = <ClueWithInput clue={data.clue.clue} clueId={clueId} clueAnsweredCallback={submitResponse}></ClueWithInput>
   } else {

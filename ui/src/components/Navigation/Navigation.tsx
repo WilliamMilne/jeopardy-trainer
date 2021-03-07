@@ -18,7 +18,7 @@ export default function Navigation() {
         <NavLink className={styles.navLink} to="/">Home</NavLink>
         <NavLink className={styles.navLink} to="/dashboard">Dashboard</NavLink>
         <NavLink className={styles.navLink} to="/episodes">Episodes</NavLink>
-        <NavLink className={styles.navLink} to="/categories">Categories</NavLink>
+        {/*<NavLink className={styles.navLink} to="/categories">Categories</NavLink>*/}
       </Header>
       <Switch>
         <Route path="/dashboard">
@@ -26,7 +26,7 @@ export default function Navigation() {
             <UserDashboard></UserDashboard>
           </div>
         </Route>
-        <Route exact path="/categories">
+        {/*<Route exact path="/categories">
           <div className={styles.bodyContent}>
             <CategorySelection></CategorySelection>
           </div>
@@ -35,7 +35,7 @@ export default function Navigation() {
           <div className={styles.bodyContent}>
             <Quiz quizType={'category'}></Quiz>
           </div>
-        </Route>
+        </Route>*/}
         <Route exact path="/episodes">
           <div className={styles.bodyContent}>
             <EpisodeSelection userId={1}></EpisodeSelection>
