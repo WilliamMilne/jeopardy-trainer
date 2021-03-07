@@ -6,6 +6,6 @@ export class NewEpisodeInput {
   @Field(type => String)
   name: string
 
-  @Field(type => String)
-  jArchiveId: string
+  @Field(type => Int)
+  jArchiveId: number
 }
