@@ -4,6 +4,7 @@ import './App.scss'
 import { Header, HeaderName } from 'carbon-components-react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import ClueContainer from './components/ClueContainer/ClueContainer';
+import Navigation from './components/Navigation/Navigation';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -15,17 +16,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Header aria-label="J-Trainer!">
-          <HeaderName href="#" prefix="">
-            J-Trainer!
-          </HeaderName>
-        </Header>
-        <div className="body">
-          <ClueContainer key={clueId} switchToNextClue={() => setClueId(clueId + 1)} clueId={clueId}></ClueContainer>
-        </div>
+        <Navigation></Navigation>
+
       </div>
     </ApolloProvider>
   );
 }
+
+// <div className="body">
+// <ClueContainer key={clueId} switchToNextClue={() => setClueId(clueId + 1)} clueId={clueId}></ClueContainer>
+// </div>
 
 export default App;

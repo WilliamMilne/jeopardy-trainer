@@ -1,6 +1,6 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Loading, Tile } from 'carbon-components-react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ClueWithInput from '../ClueWithInput/ClueWithInput';
 import CorrectResponse from '../CorrectResponse/CorrectResponse';
 import IncorrectResponse from '../IncorrectResponse/IncorrectResponse';
@@ -44,8 +44,8 @@ const SUBMIT_RESPONSE = gql`
 `
 
 interface IClueContainerProps {
-  clueId: number
   switchToNextClue: any
+  clueId: number
 }
 
 function ClueContainer(props: IClueContainerProps) {

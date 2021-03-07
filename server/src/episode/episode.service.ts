@@ -5,6 +5,16 @@ import { NewEpisodeInput } from "./episode.input";
 
 @Injectable()
 export class EpisodeService {
+  async getAllEpisodes(): Promise<Episode[]> {
+    const repo = await this.connection.getRepository(Episode);
+    const episodes = await repo.find({
+      relations: ["categories", "clues"]
+    });
+    if (!episodes) {
+      throw new NotFoundException();
+    }
+    return episodes;
+  }
   async findOneById(id: number): Promise<Episode> {
     const repo = await this.connection.getRepository(Episode);
     const episode = await repo.findOne({

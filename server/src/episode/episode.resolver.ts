@@ -15,4 +15,13 @@ export class EpisodeResolver {
     }
     return episode;
   }
+
+  @Query(returns => [Episode])
+  async episodes(): Promise<Episode[]> {
+    const episodes = await this.episodeService.getAllEpisodes();
+    if (episodes.length === 0) {
+      throw new NotFoundException();
+    }
+    return episodes;
+  }
 }
