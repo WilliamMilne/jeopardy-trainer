@@ -58,7 +58,6 @@ type Query {
   clue(id: Int!): Clue!
   episode(id: Int!): Episode!
   episodes: [Episode!]!
-  latestUserResponses(clueIds: [Int!]!, userId: Int!): [Response!]!
   response(id: Int!): Response!
   user(id: Int!): User!
 }
