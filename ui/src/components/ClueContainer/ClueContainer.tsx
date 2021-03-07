@@ -1,7 +1,6 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, Loading, Tile } from 'carbon-components-react';
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import ClueWithInput from '../ClueWithInput/ClueWithInput';
 import CorrectResponse from '../CorrectResponse/CorrectResponse';
 import IncorrectResponse from '../IncorrectResponse/IncorrectResponse';
@@ -57,7 +56,7 @@ function ClueContainer(props: IClueContainerProps) {
     }
   });
 
-  let [submitResponse, { data: responseData }] = useMutation(SUBMIT_RESPONSE);
+  const [submitResponse, { data: responseData }] = useMutation(SUBMIT_RESPONSE);
 
   function handleKeyPress(e: any) {
     if (e.key === "Enter") {
