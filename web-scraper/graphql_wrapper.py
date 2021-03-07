@@ -1,4 +1,5 @@
-from python_graphql_client import GraphqlClient
+from gql import Client, gql
+from gql.transport.aiohttp import AIOHTTPTransport
 from j_scraper import j_scraper, clue_obj
 
 class graphql_wrapper():
@@ -9,7 +10,8 @@ class graphql_wrapper():
         """
         Creates graphql client
         """
-        self.client = GraphqlClient(endpoint="http://localhost:3000/graphql")
+        transport = AIOHTTPTransport(url="http://localhost:3000/graphql")
+        self.client = Client(transport=transport, fetch_schema_from_transport=True)
 
     def send_game(self, game: j_scraper):
         """
@@ -21,30 +23,28 @@ class graphql_wrapper():
         """
         Sends clue to graphql endpoint
         """
-        mutation = """
-            mutation {
-                addClue(clueInput: {
-                    category: {
-                        name: $category
-                    },
-                    episode: {
-                        name: $date
-                        jArchiveId: $game_id
-                    },
-                    point_value: $amount,
-                    clue: $clue,
-                    correctResponse: $response
-                })
+        mutation = gql("""
+            mutation addClue($clueInput: NewClueInput!) {
+                addClue(clueInput: $clueInput){
+                    id
+                }
             }
-        """
-        variables = {
-            "category": clue.category,
-            "date:": date,
-            "game_id": game_id,
-            "amount": clue.amount,
-            "clue": clue.clue,
-            "response": clue.response
+        """)
+        params = {
+            "clueInput": {
+                "category": {
+                    "name": clue.category
+                },
+                "episode": {
+                    "name": date,
+                    "jArchiveId": game_id
+                },
+                "point_value": clue.amount,
+                "clue": clue.clue,
+                "correctResponse": clue.response
+            }
         }
 
-        resp = self.client.execute(query=mutation, variables=variables)
+
+        resp = self.client.execute(mutation, variable_values=params)
         print(resp)
