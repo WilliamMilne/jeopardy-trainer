@@ -1,11 +1,8 @@
-import { Header, HeaderContainer, HeaderMenu, HeaderMenuButton, HeaderMenuItem, HeaderName, HeaderNavigation, HeaderSideNavItems, SideNav, SideNavItems, SkipToContent } from 'carbon-components-react';
-import React from 'react';
+import { Header, HeaderName } from 'carbon-components-react';
 import styles from './Navigation.module.scss';
-import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, NavLink, Route, Switch } from "react-router-dom"
 import UserDashboard from '../UserDashboard/UserDashboard';
-import CategorySelection from '../CategorySelection/CategorySelection';
 import EpisodeSelection from '../EpisodeSelection/EpisodeSelection';
-import ClueContainer from '../ClueContainer/ClueContainer';
 import Quiz from '../Quiz/Quiz';
 
 export default function Navigation() {
