@@ -15,7 +15,7 @@ export class Episode {
   // but there really shouldn't be a reason for the graphql api to access it
   // hence, not tagging it with graphql @field tag. 
   @Column()
-  jArchiveId: string
+  jArchiveId: number
 
   @Column()
   @Field(type => String)

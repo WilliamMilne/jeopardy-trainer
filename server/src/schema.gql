@@ -44,7 +44,7 @@ input NewClueInput {
 }
 
 input NewEpisodeInput {
-  jArchiveId: String!
+  jArchiveId: Int!
   name: String!
 }
 
