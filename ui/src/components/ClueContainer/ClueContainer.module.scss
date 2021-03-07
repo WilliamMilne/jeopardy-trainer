@@ -1,0 +1,25 @@
+.ClueContainer {}
+
+.Tile {
+  max-width: 750px;
+  height: 600px;
+  margin: auto auto;
+}
+
+.category {
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  padding-left:8px;
+}
+
+.value {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right:8px;
+}
+
+.nextClue {
+  margin-top: 32px;
+}
