@@ -17,14 +17,14 @@ export class ResponseResolver {
     return response;
   }
 
-  @Query(returns => Response)
-  async userResponse(@Args('userId', { type: () => Int }) userId: number, @Args('clueId', { type: () => Int }) clueId: number) {
-    
+  @Query(returns => [Response])
+  async userResponses(@Args('userId', { type: () => Int }) userId: number, @Args('clueIds', { type: () => [Int] }) clueIds: number[]) {
+    return await this.responseService.findResponses(userId, clueIds);
   }
 
   @Mutation(returns => Response)
   async submitResponse(@Args('responseInput') responseInput: NewResponseInput): Promise<Response> {
-    const response = await this.responseService.create(responseInput);
+    const response = await this.responseService.createOrUpdate(responseInput);
     return response;
   } 
 }

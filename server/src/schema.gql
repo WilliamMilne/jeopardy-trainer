@@ -60,6 +60,7 @@ type Query {
   episodes: [Episode!]!
   response(id: Int!): Response!
   user(id: Int!): User!
+  userResponses(clueIds: [Int!]!, userId: Int!): [Response!]!
 }
 
 type Response {

@@ -18,6 +18,7 @@ const GET_CLUES_FOR_EPISODE = gql`
   query getCluesForEpisode($id: Int!) {
     episode(id: $id) {
       id
+      name
       clues {
         id
         category {
@@ -73,13 +74,15 @@ export default function Quiz(props: IQuizProps) {
   }
 
   let { clueIds, categories } = getOrderedClueIds(episodeData.episode.clues);
+
   // resultsByClue will be the same dimensions as 'categories'
   // and will have 0 for unanswered, 1 for correct, and -1 for incorrect
   return (
     <div className={styles.Quiz}>
       <QuizProgress 
+        episodeTitle={episodeData.episode.name}
         cluesByCategory={categories}
-        resultByClue={[]}
+        clueIds={clueIds}
       ></QuizProgress>
       <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={(arg: any) => {
         setClueIndex(clueIndex + 1);
