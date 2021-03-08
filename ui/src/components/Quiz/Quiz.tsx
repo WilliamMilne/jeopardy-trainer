@@ -28,8 +28,8 @@ const GET_CLUES_FOR_EPISODE = gql`
   }
 `
 
-function getOrderedClueIds(clues: Clue[]): number[] {
-  let result: number[] = [];
+function getOrderedClueIds(clues: Clue[]): any {
+  let clueIds: number[] = [];
   const categories: any = {};
 
   for(let i = 0; i < clues.length; i++) {
@@ -40,10 +40,13 @@ function getOrderedClueIds(clues: Clue[]): number[] {
   }
 
   for(let index in categories) {
-    result = result.concat(categories[index]);
+    clueIds = clueIds.concat(categories[index]);
   }
 
-  return result;
+  return { 
+    clueIds,
+    categories
+  };
 }
 
 export default function Quiz(props: IQuizProps) {
@@ -69,12 +72,19 @@ export default function Quiz(props: IQuizProps) {
     return <p>Error.</p>
   }
 
-  let clueIds = getOrderedClueIds(episodeData.episode.clues);
-
+  let { clueIds, categories } = getOrderedClueIds(episodeData.episode.clues);
+  // resultsByClue will be the same dimensions as 'categories'
+  // and will have 0 for unanswered, 1 for correct, and -1 for incorrect
   return (
     <div className={styles.Quiz}>
-      <QuizProgress></QuizProgress>
-      <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
+      <QuizProgress 
+        cluesByCategory={categories}
+        resultByClue={[]}
+      ></QuizProgress>
+      <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={(arg: any) => {
+        setClueIndex(clueIndex + 1);
+        console.log(arg)
+        }} clueId={clueIds[clueIndex]}></ClueContainer>
     </div>
   )
 };

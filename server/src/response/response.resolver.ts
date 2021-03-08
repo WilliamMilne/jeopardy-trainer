@@ -17,6 +17,11 @@ export class ResponseResolver {
     return response;
   }
 
+  @Query(returns => Response)
+  async userResponse(@Args('userId', { type: () => Int }) userId: number, @Args('clueId', { type: () => Int }) clueId: number) {
+    
+  }
+
   @Mutation(returns => Response)
   async submitResponse(@Args('responseInput') responseInput: NewResponseInput): Promise<Response> {
     const response = await this.responseService.create(responseInput);
