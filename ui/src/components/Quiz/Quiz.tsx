@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Clue, Episode } from '../../generated/graphql';
 import ClueContainer from '../ClueContainer/ClueContainer';
+import QuizProgress from '../QuizProgress/QuizProgress';
 import styles from './Quiz.module.scss';
 
 interface IQuizProps {
@@ -71,6 +72,9 @@ export default function Quiz(props: IQuizProps) {
   let clueIds = getOrderedClueIds(episodeData.episode.clues);
 
   return (
-    <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
+    <div className={styles.Quiz}>
+      <QuizProgress></QuizProgress>
+      <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={() => {setClueIndex(clueIndex + 1)}} clueId={clueIds[clueIndex]}></ClueContainer>
+    </div>
   )
 };

@@ -97,8 +97,10 @@ function ClueContainer(props: IClueContainerProps) {
   return (
     <div>
       <Tile className={styles.Tile}>
-        <p className={styles.category}>Category: {data.clue.category.name}</p>
-        <p className={styles.value}>Value: ${data.clue.point_value}</p>
+        <Tile className={styles.HeaderTile}>
+          <h3>{data.clue.category.name}</h3>
+          <h3>${data.clue.point_value}</h3>
+        </Tile>
         <div>{content}</div>
         {responseData !== undefined && <Button onClick={props.switchToNextClue} className={styles.nextClue}>Next clue!</Button>}
       </Tile>
