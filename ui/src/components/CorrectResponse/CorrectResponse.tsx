@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styles from './CorrectResponse.module.scss';
 import { CheckmarkFilled32 } from '@carbon/icons-react'
 

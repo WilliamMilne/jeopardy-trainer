@@ -1,1 +1,19 @@
 .QuizProgress {}
+
+.CategoryRow {
+  display: flex;
+  flex-direction: row;
+  margin: auto auto;
+}
+
+.Unanswered {
+
+}
+
+.Correct {
+  color: #24a148
+}
+
+.Incorrect {
+  color: #da1e28
+}

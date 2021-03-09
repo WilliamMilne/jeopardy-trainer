@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Clue, Episode } from '../../generated/graphql';
+import { Clue } from '../../generated/graphql';
 import ClueContainer from '../ClueContainer/ClueContainer';
 import QuizProgress from '../QuizProgress/QuizProgress';
 import styles from './Quiz.module.scss';
@@ -69,7 +69,6 @@ export default function Quiz(props: IQuizProps) {
   }
 
   if (episodeError) {
-    console.log(episodeError);
     return <p>Error.</p>
   }
 
@@ -86,7 +85,6 @@ export default function Quiz(props: IQuizProps) {
       ></QuizProgress>
       <ClueContainer key={`${episodeData.episode.id}${clueIndex}`} switchToNextClue={(arg: any) => {
         setClueIndex(clueIndex + 1);
-        console.log(arg)
         }} clueId={clueIds[clueIndex]}></ClueContainer>
     </div>
   )

@@ -1,6 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { ClickableTile, DataTable, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tile } from 'carbon-components-react';
-import React from 'react';
+import { ClickableTile } from 'carbon-components-react';
 import { Episode } from '../../generated/graphql';
 import styles from './EpisodeSelection.module.scss';
 
