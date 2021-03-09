@@ -39,16 +39,27 @@ function createResponseMap(userResponses: Response[]): { [key: number]: Response
   return result;
 }
 
-function createCorrectnessArray(categoryClues: number[], userResponseMap: { [key: number]: Response }): Correctness[] {
-  const result: Correctness[] = [];
+interface CorrectnessWithKey {
+  correctness: Correctness
+  key: string
+}
+
+function createCorrectnessArray(categoryClues: number[], userResponseMap: { [key: number]: Response }): CorrectnessWithKey[] {
+  const result: CorrectnessWithKey[] = [];
   for (let i = 0; i < categoryClues.length; i++) {
     const clue = categoryClues[i];
     if (userResponseMap[clue] !== undefined) {
-      const correct = userResponseMap[clue].response_correct ? 
+      const correctnessValue = userResponseMap[clue].response_correct ? 
         Correctness.correct : Correctness.incorrect;
-      result.push(correct);
+      result.push({
+        correctness: correctnessValue,
+        key: `correctness-${clue}`
+      });
     } else {
-      result.push(Correctness.unanswered);
+      result.push({
+        correctness: Correctness.unanswered,
+        key: `correctness-${clue}`
+      });
     }
   }
   return result;
@@ -67,17 +78,18 @@ function createCategoryCorrectnessRows(cluesByCategory: number[][], userResponse
   return resultComponent;
 }
 
-function createCategoryCorrectnessRow(correctness: Correctness[]): any{
+function createCategoryCorrectnessRow(correctness: CorrectnessWithKey[]): any{
   let content: any = [];
   let i = 0;
   for (i; i < correctness.length; i++) {
+    const key = correctness[i].key
     let result;
-    if (correctness[i] === Correctness.unanswered) {
-      result = <HelpFilled32 className={styles.Unanswered}></HelpFilled32>;
-    } else if (correctness[i] === Correctness.correct) {
-      result = <CheckmarkFilled32 className={styles.Correct}></CheckmarkFilled32>;
+    if (correctness[i].correctness === Correctness.unanswered) {
+      result = <HelpFilled32 key={key} className={styles.Unanswered}></HelpFilled32>;
+    } else if (correctness[i].correctness === Correctness.correct) {
+      result = <CheckmarkFilled32 key={key} className={styles.Correct}></CheckmarkFilled32>;
     } else {
-      result = <CloseFilled32 className={styles.Incorrect}></CloseFilled32>;
+      result = <CloseFilled32 key={key} className={styles.Incorrect}></CloseFilled32>;
     }
           
     content = [content, result];
@@ -85,7 +97,7 @@ function createCategoryCorrectnessRow(correctness: Correctness[]): any{
 
   // need an array of booleans
   return (
-    <div className={styles.CategoryRow}>
+    <div key={`correctnessRow-${correctness[0].key}`} className={styles.CategoryRow}>
       {content}
     </div>
   );
