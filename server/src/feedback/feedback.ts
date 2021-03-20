@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Clue } from "../clue/clue";
+import { User } from "../user/user";
 
 
 @Entity()
@@ -12,8 +13,8 @@ export class Feedback {
 
     @ManyToOne(() => Clue)
     @JoinColumn()
-    @Field(type => Int)
-    clue_id: number
+    @Field(type => Clue)
+    clue: Clue
     
     @Column()
     @Field(type => String)
@@ -22,4 +23,8 @@ export class Feedback {
     @Column()
     @Field(type => Boolean)
     resolved: boolean
+
+    @ManyToOne(() => User)
+    @Field(type => User)
+    user: User
 }

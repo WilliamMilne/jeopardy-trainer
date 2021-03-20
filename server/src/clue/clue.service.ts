@@ -28,13 +28,13 @@ export class ClueService {
 
   async findOneById(id: number): Promise<Clue> {
     const repository = await this.connection.getRepository(Clue);
-    const user = await repository.findOne({
+    const clue = await repository.findOne({
       where: {
         id
       },
       relations: ['category', 'episode']
-    })
-    return user;
+    });
+    return clue;
   }
 
   async findAll(args: any): Promise<Clue[]> {

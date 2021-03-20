@@ -25,8 +25,17 @@ type Episode {
   name: String!
 }
 
+type Feedback {
+  clue: Clue!
+  comment: String!
+  id: Int!
+  resolved: Boolean!
+  user: User!
+}
+
 type Mutation {
   addClue(clueInput: NewClueInput!): Clue!
+  addFeedback(feedbackInput: NewFeedbackInput!): Feedback!
   addUser(name: String!): User!
   submitResponse(responseInput: NewResponseInput!): Response!
 }
@@ -48,6 +57,12 @@ input NewEpisodeInput {
   name: String!
 }
 
+input NewFeedbackInput {
+  clueId: ID!
+  comment: String!
+  userId: ID!
+}
+
 input NewResponseInput {
   clueId: ID!
   userId: ID!
@@ -58,6 +73,9 @@ type Query {
   clue(id: Int!): Clue!
   episode(id: Int!): Episode!
   episodes: [Episode!]!
+  feedbackByClue(clueId: Int!): Feedback!
+  feedbackById(id: Int!): Feedback!
+  feedbackByUser(userId: Int!): Feedback!
   response(id: Int!): Response!
   user(id: Int!): User!
 }

@@ -7,7 +7,7 @@ import ClueContainer from './components/ClueContainer/ClueContainer';
 import Navigation from './components/Navigation/Navigation';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://192.168.1.19:3000/graphql',
   cache: new InMemoryCache()
 });
 

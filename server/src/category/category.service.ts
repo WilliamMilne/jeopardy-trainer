@@ -8,7 +8,7 @@ import { NewCategoryInput } from "./category.input";
 export class CategoryService {
   constructor(private connection: Connection){}
 
-  async create(input: NewCategoryInput, episode: Episode) {
+  async create(input: NewCategoryInput, episode: Episode): Promise<Category> {
     const repo = await this.connection.getRepository(Category);
     const category = await repo.save({
       name: input.name,
@@ -17,7 +17,7 @@ export class CategoryService {
     return category;
   }
 
-  async createOrGet(input: NewCategoryInput, episode: Episode){
+  async createOrGet(input: NewCategoryInput, episode: Episode): Promise<Category> {
     const repo = await this.connection.getRepository(Category);
     const existingCategory = await repo.findOne({
       where: {
